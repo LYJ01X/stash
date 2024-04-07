@@ -43,7 +43,6 @@ proxy-groups:
       - 海外香港
       - 海外日本
       - 海外台湾
-      - 国内代理
   - name: 国内代理
     type: select
     proxies:
