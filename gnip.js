@@ -7,7 +7,7 @@ $httpClient.get('https://searchplugin.csdn.net/api/v1/ip/get?ip', function (erro
 	;
 	
 $done({
-    title: '当前国内IP地址',
+    title: '本机国内IP地址',
     content: `${address}\n${ip}`,
   })
  })
