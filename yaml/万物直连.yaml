@@ -1,1 +1,132 @@
+#百度直连
+baidu: &baidu
+  type: http
+  port: 443
+  headers:
+    X-T5-Auth: 683556433
+    Host: 153.3.236.22:443
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver: [223.5.5.5, 119.29.29.29]
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  use-hosts: true
+  nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+  fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://120.53.53.53/dns-query', dot.pub]
+  fallback-filter: {geo: [240.0.0.0/4, 0.0.0.0/32]}
+  skip-cert-verify: true
+proxies:
+  - name: 南京联通
+    server: 153.3.237.117
+    !!merge <<: *baidu
+  - name: 苏州联通
+    server: 157.0.148.53
+    !!merge <<: *baidu
+  - name: 保定联通
+    server: 110.242.70.69
+    !!merge <<: *baidu
+  - name: 联通保定
+    server: 110.242.70.68
+    !!merge <<: *baidu
+proxy-groups: [{icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png', name: 国内代理, type: select, proxies: [百度直连, 国内节点]}, {name: 百度直连, proxies: [南京联通, 苏州联通, 保定联通, 联通保定], type: url-test, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_Fitness.png'}, {name: 国内节点, type: url-test, proxies: null, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Find_My.png', filter: 济南|广州|咸阳|沈阳|杭州|河南|鞍山|襄阳|武汉, use: [机场订阅]}, {name: 国外节点, type: url-test, proxies: null, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png', filter: 香港|新加坡|日本|台湾, use: [机场订阅]}]
+rules:
+  - DOMAIN-SUFFIX,wechatpay.cn,国内节点
+  - DOMAIN,szminorshort.weixin.qq.com,国内节点
+  - DOMAIN,app-analytics-services.com,国内节点
+  - DOMAIN,vv.video.qq.com,国内节点 # QQ
+  - DOMAIN,sq.bls.mdt.qq.com,国内节点 # QQ
+  - DOMAIN-SUFFIX,bilibili.com,国内节点
+  - DOMAIN-SUFFIX,gitee.com,国内节点 # gitee
+  - DOMAIN-SUFFIX,combmobile.com,国内节点 # 丰巢
+  - DOMAIN-SUFFIX,wx.tenpay.com,国内节点 # 微信支付
+  - DST-PORT,30443,国内节点
+  - DST-PORT,446,国内节点
+  - DST-PORT,441,国内节点
+  - DST-PORT,81,国内节点
+  - DOMAIN-SUFFIX,fcbox.com,国内节点
+  - DOMAIN-SUFFIX,mychery.com,国内节点
+  - RULE-SET,iCloud_domain,国内节点
+  - RULE-SET,ad_domain,REJECT
+  - RULE-SET,Apple_domain,国内节点
+  - SCRIPT,UDP_CN,国内节点 #国内UDP
+  - GEOIP,CN,国内代理
+  - MATCH,国外节点 # 兜底策略
+script:
+  shortcuts: # 可以在 rule 中引用
+    UDP_CN: network == 'udp' and geoip(dst_ip if dst_ip != '' else resolve_ip(host)) == 'CN' # 匹配发往国内的 UDP
+proxy-providers:
+  机场订阅:
+    interval: 86400
+    url: 订阅链接&flag=stash&host=混淆&udp=true
+http:
+  force-http-engine:
+    - "boxjs.com:80"
+    - "boxjs.net:80"
+    - "*.boxjs.com:80"
+    - "*.boxjs.net:80"
+    - "10010v4.com"
+    - "10010v4.zhetengsha.eu.org"
+  mitm:
+    - "boxjs.com"
+    - "boxjs.net"
+    - "*.boxjs.com"
+    - "*.boxjs.net"
+    - 10010v4.com
+    - "10010v4.zhetengsha.eu.org"
+  script:
+    - match: ^https?:\/\/(.+\.)?boxjs\.(com|net)
+      name: BoxJs
+      type: request
+      require-body: true
+      timeout: 120
+    - match: ^https?:\/\/10010v4\.com
+      name: "联通余量(v4)"
+      type: request
+      # require-body: true
+      timeout: 120
+      # debug: true
+script-providers:
+  BoxJs:
+    url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js
+    interval: 86400
+  "联通余量(v4)":
+    url: "https://github.com/ChinaTelecomOperators/ChinaUnicom/releases/download/Prerelease-Alpha/10010.js"
+    interval: 86400
+  IP:
+    url: https://raw.githubusercontent.com/LYJ01X/stash/main/gnip.js
+    interval: 86400
+  GWIP:
+    url: https://raw.githubusercontent.com/LYJ01X/stash/main/gwip.js
+    interval: 86400
+tiles:
+  - name: IP #国内IP
+    interval: 600
+    icon: 'theatermasks.circle.fill'
+    backgroundColor: '#f50505'
+  - name: GWIP #国外IP
+    interval: 600
+    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
+    backgroundColor: '#f50506'
+rule-providers:
+  Apple_domain:
+    behavior: domain # 使用 domain 类规则集，可以使匹配更高效
+    format: yaml # 使用 yaml 格式的规则集
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt #apple域名
+    interval: 86400
+  ad_domain:
+    behavior: domain # 使用 domain 类规则集，可以使匹配更高效
+    format: yaml # 使用 yaml 格式的规则集
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+    interval: 86400
+  iCloud_domain:
+    behavior: domain # 使用 domain 类规则集，可以使匹配更高效
+    format: yaml # 使用 yaml 格式的规则集
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt
+    interval: 86400
+cron:
+  script:
+    - name: "联通余量(v4)"
+      cron: "*/55 * * * *" # at every 5th minute
+      timeout: 120
 
