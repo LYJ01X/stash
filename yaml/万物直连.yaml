@@ -93,21 +93,6 @@ script-providers:
   "联通余量(v4)":
     url: "https://github.com/ChinaTelecomOperators/ChinaUnicom/releases/download/Prerelease-Alpha/10010.js"
     interval: 86400
-  IP:
-    url: https://raw.githubusercontent.com/LYJ01X/stash/main/gnip.js
-    interval: 86400
-  GWIP:
-    url: https://raw.githubusercontent.com/LYJ01X/stash/main/gwip.js
-    interval: 86400
-tiles:
-  - name: IP #国内IP
-    interval: 600
-    icon: 'theatermasks.circle.fill'
-    backgroundColor: '#f50505'
-  - name: GWIP #国外IP
-    interval: 600
-    icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png'
-    backgroundColor: '#f50506'
 rule-providers:
   Apple_domain:
     behavior: domain # 使用 domain 类规则集，可以使匹配更高效
@@ -124,9 +109,4 @@ rule-providers:
     format: yaml # 使用 yaml 格式的规则集
     url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt
     interval: 86400
-cron:
-  script:
-    - name: "联通余量(v4)"
-      cron: "*/55 * * * *" # at every 5th minute
-      timeout: 120
 
