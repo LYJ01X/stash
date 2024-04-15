@@ -1,4 +1,4 @@
-.get('https://api.no0a.cn/api/onenote/query', function (error, response, data){
+$httpClient.get('https://api.no0a.cn/api/onenote/query', function (error, response, data){
 	let jsonData = JSON.parse(data)
 	let onenote =jsonData.onenote 
 	;
