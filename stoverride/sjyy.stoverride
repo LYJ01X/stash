@@ -2,10 +2,10 @@
 name: 随机一言
 desc: 随机一言,作者酷安 @ 迷路的浅殇
 icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
-    "一言":
-      url: "https://raw.githubusercontent.com/LYJ01X/stash/main/js/sjyy.js"
-interval: 86400
 tiles:
   - name: 一言
     icon: 'mappin.and.ellipse'
-    backgroundColor: '#f50505'
+    backgroundColor: '#f50505'   
+"一言":
+      url: "https://raw.githubusercontent.com/LYJ01X/stash/main/js/sjyy.js"
+interval: 86400
