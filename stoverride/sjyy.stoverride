@@ -13,5 +13,5 @@ tiles:
     # debug: true
 script-providers:
   "yy":
-    url: "https://github.com/ChinaTelecomOperators/ChinaUnicom/releases/download/Prerelease-Alpha/10010.js"
+    url: "https://raw.githubusercontent.com/LYJ01X/stash/main/js/sjyy.js"
     interval: 86400
