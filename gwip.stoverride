@@ -6,4 +6,4 @@ tiles:
     backgroundColor: '#f50505'
 script-providers:
   GWIP:
-    url: https://raw.githubusercontent.com/LYJ01X/stash/main/gwip.js
+    url: https://raw.githubusercontent.com/LYJ01X/stash/main/js/gwip.js
