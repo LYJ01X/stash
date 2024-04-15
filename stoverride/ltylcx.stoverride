@@ -1,0 +1,7 @@
+name: 余量定时任务
+desc: 定时查询联通余量,50分钟查询一次
+cron:
+  script:
+    - name: "联通余量(v4)"
+      cron: "*/50 * * * *"
+      timeout: 120
