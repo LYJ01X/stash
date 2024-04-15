@@ -5,7 +5,8 @@ icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
 tiles:
   - name: 一言
     icon: 'mappin.and.ellipse'
-    backgroundColor: '#f50505'   
+    backgroundColor: '#f50505' 
+script-providers:
 "一言":
       url: "https://raw.githubusercontent.com/LYJ01X/stash/main/js/sjyy.js"
 interval: 86400
