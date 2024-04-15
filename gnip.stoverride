@@ -1,9 +1,0 @@
-name: 国内IP
-desc: 查询国内的IP,作者酷安 @ 迷路的浅殇
-tiles:
-  - name: GNIP
-    icon: 'mappin.and.ellipse'
-    backgroundColor: '#f50505'
-script-providers:
-  GNIP:
-    url: https://raw.githubusercontent.com/LYJ01X/stash/main/js/gnip.js
