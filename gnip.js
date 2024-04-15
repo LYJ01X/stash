@@ -9,7 +9,5 @@ $httpClient.get('https://searchplugin.csdn.net/api/v1/ip/get?ip', function (erro
 $done({
     title: '当前国内IP地址',
     content: `${address}\n${ip}`,
-    backgroundColor: '#663399',
-    icon: 'network',
   })
  })
