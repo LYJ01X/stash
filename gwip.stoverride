@@ -1,9 +1,9 @@
 name: 国外IP
 desc: 查询国外的IP,作者酷安 @ 迷路的浅殇
 tiles:
-  - name: GNIP
+  - name: GWIP
     icon: 'mappin.and.ellipse'
     backgroundColor: '#f50505'
 script-providers:
-  GNIP:
+  GWIP:
     url: https://raw.githubusercontent.com/LYJ01X/stash/main/gwip.js
