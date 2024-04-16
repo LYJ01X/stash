@@ -1,13 +1,14 @@
 name: 百度直连
 desc: 百度直连免流全局版
 icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
-#百度直连
- baidu: &baidu
+
+baidu: &baidu
   type: http
   port: 443
   headers:
     X-T5-Auth: 683556433
     Host: 153.3.236.22:443
+
 proxies:
   - name: 南京联通
     server: 153.3.237.117
