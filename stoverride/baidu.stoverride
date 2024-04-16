@@ -1,3 +1,6 @@
+name: 百度直连
+desc: 百度直连免流
+icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
 baidu: &baidu
   type: http
   port: 443
