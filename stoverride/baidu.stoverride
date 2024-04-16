@@ -1,6 +1,7 @@
 name: 百度直连
 desc: 百度直连免流全局版
 icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
+#百度直连
 baidu: &baidu
   type: http
   port: 443
@@ -10,13 +11,13 @@ baidu: &baidu
 proxies:
   - name: 南京联通
     server: 153.3.237.117
-    !!merge <<: *baidu
+    <<: *baidu
   - name: 苏州联通
     server: 157.0.148.53
-    !!merge <<: *baidu
+    <<: *baidu
   - name: 保定联通
     server: 110.242.70.69
-    !!merge <<: *baidu
+    <<: *baidu
   - name: 联通保定
     server: 110.242.70.68
-    !!merge <<: *baidu
+    <<: *baidu
