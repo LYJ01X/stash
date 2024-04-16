@@ -1,0 +1,6 @@
+baidu: &baidu
+  type: http
+  port: 443
+  headers:
+    X-T5-Auth: 683556433
+    Host: 153.3.236.22:443
