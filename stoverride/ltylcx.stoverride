@@ -1,8 +1,8 @@
 name: 余量定时任务
-desc: 定时查询联通余量,50分钟查询一次
+desc: 定时查询联通余量,九点到二十三点每半小时运行一次
 icon: http://q.qlogo.cn/headimg_dl?dst_uin=865068376&spec=640&img_type=jpg
 cron:
   script:
     - name: "联通余量(v4)"
-      cron: "*/50 * * * *"
+      cron: "0 0/30 9-23 * * ?"
       timeout: 120
